@@ -6,6 +6,8 @@
   height:100vh;
   font-family: 'Source Sans Pro';
   position: relative;
+  /* background-image: linear-gradient(to right, #9CECFB , #65C7F7, #0052D4); */
+  background-image: linear-gradient(to right, #3494E6 , #EC6EAD);
 }
 
 .number{
