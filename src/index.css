@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root{
+  height:100vh;
+  font-family: 'Source Sans Pro';
+  position: relative;
+}
+
+.number{
+  @apply text-2xl font-semibold h-[64px] 
+}
+
+.clear{
+  @apply text-2xl font-semibold h-[64px] text-[#FF6060] 
+}
+
+.operator{ 
+  @apply text-2xl text-[#00B0D7] font-semibold h-[64px] 
+}
+
+.number, .clear, .operator {
+  @apply rounded-lg hover:bg-slate-200 transition-all ease-linear duration-150
+}
