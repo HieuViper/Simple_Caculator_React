@@ -3,15 +3,11 @@
 @tailwind utilities;
 
 #root{
-  height:100vh;
-  font-family: 'Source Sans Pro';
-  position: relative;
-  /* background-image: linear-gradient(to right, #9CECFB , #65C7F7, #0052D4); */
-  background-image: linear-gradient(to right, #3494E6 , #EC6EAD);
+  @apply h-[100vh] font-SFPro relative bg-gradient-to-r from-[#3494E6] to-[#EC6EAD]
 }
 
 .number{
-  @apply text-2xl font-semibold h-[64px] 
+  @apply text-2xl font-semibold h-[64px] dark:text-white text-black
 }
 
 .clear{
@@ -23,5 +19,9 @@
 }
 
 .number, .clear, .operator {
-  @apply rounded-lg hover:bg-slate-200 transition-all ease-linear duration-150
+  @apply rounded-lg dark:hover:bg-slate-500 hover:bg-slate-200 transition-all ease-linear duration-150
+}
+
+.rtl{
+  direction: rtl;
 }

@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useRef, useEffect } from 'react';
 import DigitButton from './DigitButton';
 import OperationButton from './OperationButton';
 import ClearButton from './ClearButton';
@@ -20,7 +20,7 @@ export const ACTIONS = {
 function reducer(state, { type, payload }) {
   switch (type) {
     case ACTIONS.ADD_DIGIT:
-      if(state.overwrite){
+      if (state.overwrite) {
         return {
           ...state,
           currentOperand: payload.digit,
@@ -64,18 +64,18 @@ function reducer(state, { type, payload }) {
       }
 
     case ACTIONS.DELETE_DIGIT:
-      if(state.overwrite){
+      if (state.overwrite) {
         return {
           ...state,
-          currentOperand:null,
+          currentOperand: null,
           previousOperand: null,
-          overwrite:false
+          overwrite: false
         }
       }
-      if(state.currentOperand == null){
+      if (state.currentOperand == null) {
         return state
       }
-      if(state.currentOperand.length === 1 ){
+      if (state.currentOperand.length === 1) {
         return {
           ...state,
           currentOperand: null
@@ -84,7 +84,7 @@ function reducer(state, { type, payload }) {
 
       return {
         ...state,
-        currentOperand: state.currentOperand.slice(0 , -1)
+        currentOperand: state.currentOperand.slice(0, -1)
       }
 
     case ACTIONS.EVALUATE:
@@ -132,45 +132,42 @@ const INTEGER_FORMATTER = new Intl.NumberFormat('en-us', {
 })
 
 function NumberFormat(operand) {
-  if (operand == null) return 
+  if (operand == null) return
   let numnber = operand.toString()
-  const [integer , decimal] = numnber.split(".")
-  if(decimal == null) return INTEGER_FORMATTER.format(integer)
+  const [integer, decimal] = numnber.split(".")
+  if (decimal == null) return INTEGER_FORMATTER.format(integer)
   return `${INTEGER_FORMATTER.format(integer)}.${decimal}`
 }
 
 function App() {
-
   const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(reducer, {})
-  const date = new Date()
-
 
   return (
-    <div className="App absolute top-[50%] -translate-x-[50%] -translate-y-[50%] left-[50%] w-[320px] h-[568px] mx-auto bg-[#FFFFFF] rounded-[20px] flex flex-col">
-      <div className="header h-[44px] mx-3 flex items-center justify-between">
+    <div className="App shadow-xl absolute top-[50%] -translate-x-[50%] -translate-y-[50%] left-[50%] w-[320px] h-[568px] mx-auto dark:bg-[#00223A] bg-[#FFFFFF] rounded-[20px] flex flex-col">
+      <div className="header h-[44px] px-3 rounded-t-2xl flex items-center justify-between dark:bg-black">
         {/* <div className="time"></div> */}
         <Clock />
         <div className="icon-header flex gap-1">
-          <div><IoCellular /></div>
-          <div><BiWifi /></div>
-          <div><BsBatteryFull /></div>
+          <div className='dark:text-white'><IoCellular /></div>
+          <div className='dark:text-white'><BiWifi /></div>
+          <div className='dark:text-white'><BsBatteryFull /></div>
         </div>
       </div> {/* End of header */}
 
-      <div className="output h-[157px] text-right relative bg-[#FAFAFA]">
+      <div className="output h-[157px] text-right relative dark:bg-[#00223A] bg-[#FAFAFA]">
         <div className="pt-16 pr-3 bottom-1 right-5 flex flex-col">
           <div className="previous-operand text-[24px] ">
             {/* <span className="previous-number">{previousNumber}</span>
             <span className="previous-operator text-[#FF6060] font-semibold mx-1">{operation}</span>
             <span className="previous-number">{previousNumber}</span> */}
-            <span className="previous-operand">{NumberFormat(previousOperand)}</span>
+            <span className="dark:text-white previous-operand">{NumberFormat(previousOperand)}</span>
             <span className="previous-operator text-[#FF6060] font-semibold mx-1"> {operation} </span>
           </div>
-          <div className="current-operand font-semibold text-[32px]">{NumberFormat(currentOperand)}</div>
+          <div className="current-operand break-words font-semibold text-[32px] dark:text-white">{NumberFormat(currentOperand)}</div>
         </div>
       </div> {/* End of output */}
 
-      <div className="caculator-grid pt-4 pb-8 px-4 bg-[#E9F6FF] flex-1 rounded-2xl relative">
+      <div className="caculator-grid pt-4 pb-8 px-4 dark:bg-[#001B2F] bg-[#E9F6FF] flex-1 rounded-2xl relative">
         <div className="grid grid-cols-4">
           <ClearButton operation="AC" dispatch={dispatch} />
           <DeleteButton operation="⌫" dispatch={dispatch} />
