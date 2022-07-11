@@ -13,7 +13,7 @@ const Clock = () => {
   }
   
   return (
-    <div className='font-semibold'>{formatAMPM(new Date)}</div>
+    <div className='font-semibold dark:text-white'>{formatAMPM(new Date)}</div>
   )
 }
 
